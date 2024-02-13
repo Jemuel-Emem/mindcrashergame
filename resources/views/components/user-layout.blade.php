@@ -29,10 +29,13 @@
 
 </head>
 
-<body class="font-sans antialiased md:h-screen h-12/12  bg-no-repeat bg-gradient-to-tr from-blue-700 via-white to-blue-100">
+<body class="font-sans antialiased md:h-screen h-cover bg-no-repeat bg-gradient-to-tr from-blue-700 via-white to-blue-100">
     @livewireScripts
-
+    <x-dialog />
     <nav class="bg-blue-700 border-gray-200 dark:bg-gray-900 ">
+        <audio id="song" class="block w-full max-w-md mx-auto" >
+            <source src="{{ asset('music/m1.mp3') }}" type="audio/mpeg" loop>
+        </audio>
         <div class=" flex flex-wrap items-center justify-between mx-auto p-4">
           <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="{{ asset('images/sksu.png') }}" alt="Violation Photo" class="w-16 h-16">
@@ -49,6 +52,7 @@
               <li>
                 <a href="{{ route('user-dashboard') }}"  class="block py-2 px-3 text-white  rounded md:bg-transparent  md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
               </li>
+
               <li>
                 <a href="{{ route('logout') }}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">
                 Logout

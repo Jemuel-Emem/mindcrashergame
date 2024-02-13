@@ -25,9 +25,8 @@
             </div>
 
             <div class="mt-4">
-                @if($score > auth()->user()->coins1)
+                @if($score > auth()->user()->coins1 )
                 <p class="text-xl">YOU GET {{ $score }} POINTS</p>
-
             @else
                 <p class="text-xl text-red-500">Sorry, your score is lower than your current score.</p>
             @endif

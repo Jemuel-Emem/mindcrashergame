@@ -1,24 +1,36 @@
 <!-- livewire/user/level1.blade.php -->
 
-<div>
+<div class="">
     <audio id="song" class="block w-full max-w-md mx-auto" >
-        <source src="{{ asset('music/m1.mp3') }}" type="audio/mpeg" loop>
-        </audio>
+        {{-- <source src="{{ asset('music/m2.mp3') }}" type="audio/mpeg" loop> --}}
+    </audio>
     @if (!$showContent)
+    <div class="">
+        <x-card title="Read the mechanics">
+            <div class="text-start">
+                <p>This the game gbashashaisiah</p>
+            </div>
+            <div class="flex justify-center md:py-0 py-60">
+                <button onclick="startCountdown()" wire:click="toggleContent"  class="bg-green-500 hover:bg-green-600 text-white p-2 rounded md:h-16 h-16 md:w-2/12 w-11/12">Start</button>
+            </div>
 
-        <div class="flex justify-center md:py-0 py-60">
-            <button onclick="startCountdown()" wire:click="toggleContent"  class="bg-green-500 hover:bg-green-600 text-white p-2 rounded md:h-16 h-16 md:w-2/12 w-11/12">Start</button>
-        </div>
+        </x-card>
+    </div>
+
     @else
+    <div class="flex justify-center mb-4">
+       <div  x-data="{ title: 'are you sure?, it will deduct 5 coins' }">
+        <i class="ri-lightbulb-fill text-8xl text-yellow-500 hover:text-yellow-400"  x-on:confirm="{
+            title,
+            icon: 'warning',
+            method: 'deduct',
+            params: {{ auth()->user()->id }}
+        }"></i>
+        </div>
+    </div>
     <div>
-
-
            <div class="flex justify-center mb-8 text-red-500 text-4xl font-black">
             <div id="countdown"></div>
-
-            {{-- <x-countdown :expires="now()->addSeconds(10)"  >
-                <span x-text="timer.seconds" wire:model="timer">{{ $component->seconds() }}</span> seconds
-            </x-countdown> --}}
            </div>
     </div>
 
@@ -48,49 +60,17 @@
 </div>
 
 <script>
-// const backgroundMusic = document.getElementById("song");
-
-//     function startCountdown() {
-//         backgroundMusic.play();
-//         // Set the duration of the countdown in seconds
-//         const countdownDuration = 52;
-
-//         // Calculate the end time
-//         const countDownDate = new Date().getTime() + countdownDuration * 1000;
-//         // Function to update the countdown
-//         function updateCountdown() {
-//             // Get the current date and time
-//             const now = new Date().getTime();
-
-//             // Calculate the remaining time
-//             const distance = countDownDate - now;
-
-//             // Ensure that the countdown does not go below zero
-//             const seconds = Math.max(0, Math.floor(distance / 1000));
-
-//             // Display the countdown
-//             document.getElementById("countdown").innerHTML = `${seconds}s`;
-
-//             // If the countdown is over, proceed to another view
-//             if (distance <= 0) {
-//                 clearInterval(countdownInterval);
-//                 backgroundMusic.pause();
-//                 // Add your logic to proceed to another view here
-//                 window.location.href = '{{ route('user-dashboard') }}';
-//             }
-//         }
-
-//         // Update the countdown every 1 second
-//         const countdownInterval = setInterval(updateCountdown, 1000);
-//         updateCountdown();
-//     }
-
 const backgroundMusic = document.getElementById("song");
+let isMusicPlaying = false;
 
 function startCountdown() {
-    backgroundMusic.play();
-    // Set the duration of the countdown in seconds
-    const countdownDuration = 22;
+    if (!isMusicPlaying) {
+        backgroundMusic.play();
+        isMusicPlaying = true;
+    }
+
+
+    const countdownDuration = 50;
 
     // Calculate the end time
     const countDownDate = new Date().getTime() + countdownDuration * 1000;
@@ -112,21 +92,19 @@ function startCountdown() {
         // If the countdown is over, proceed to another view
         if (distance <= 0) {
             clearInterval(countdownInterval);
-            backgroundMusic.pause();
+            if (isMusicPlaying) {
+                backgroundMusic.pause();
+                isMusicPlaying = false;
+            }
             // Add your logic to proceed to another view here
             window.location.href = '{{ route('user-dashboard') }}';
-        }
-
-        else {
-            backgroundMusic.play();
         }
     }
 
     // Update the countdown every 1 second
     const countdownInterval = setInterval(updateCountdown, 1000);
-
-    // Immediately call updateCountdown to avoid delay in starting the countdown
     updateCountdown();
 }
+
 
 </script>

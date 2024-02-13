@@ -72,7 +72,8 @@
                 <x-input label="Choice # 3" placeholder="" wire:model="answer3" />
                 <p class="text-blue-700">Write  the correct answer</p>
                 <x-input label="Answer" placeholder="" wire:model="answer" />
-
+                <p class="text-blue-700">Write  hint for question</p>
+                <x-input label="Hint" placeholder="" wire:model="hint" />
 
             </div>
 

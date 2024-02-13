@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 use App\Models\Questions2 as Modelquestion;
+use App\Models\Coins as coins;
 use App\Models\User as UserCoins;
 use Livewire\Component;
 
@@ -15,6 +16,7 @@ class Level2 extends Component
     public $timer;
     public $seconds = 30;
 
+    public $coinss;
     public $correctAnswer;
     public $showContent = false;
     public function mount()
@@ -24,38 +26,32 @@ class Level2 extends Component
     }
     public function render()
     {
-        if ($this->currentQuestionIndex >= $this->maxQuestions) {
+        if ($this->currentQuestionIndex >= $this->maxQuestions || !isset($this->questions[$this->currentQuestionIndex])) {
             $user = auth()->user();
-             if ($this->score > $user->coins2) {
+            if ($this->score > $user->coins2) {
 
-                 // Save the user's new score
-                 UserCoins::updateOrCreate(
-                     ['id' => $user->id],
-                     ['coins2' => $this->score]
-               );
+                UserCoins::updateOrCreate(
+                    ['id' => $user->id],
+                    ['coins2' => $this->score]
+                );
             }
-             else{
-              dd("sasa");
-             }
 
-
-            return view('livewire.User.easypoints', [
-                'score1' => $this->score,
-                'correctAnswer1' => $this->correctAnswer,
+            return view('livewire.User.Mediumpoints', [
+                'score2' => $this->score,
+                 'correctAnswer2' => $this->correctAnswer,
             ]);
+
         }
 
         $currentQuestion = $this->questions[$this->currentQuestionIndex];
         $this->correctAnswer = $currentQuestion->answer;
-        return view('livewire.user.level2', compact('currentQuestion') );
+        return view('livewire.user.level2', compact('currentQuestion'));
     }
     public function nextQuestion()
     {
 
-         // Validate answer or perform any other necessary logic here
-         $correctAnswer = $this->questions[$this->currentQuestionIndex]->answer;
 
-         // Compare the user's answer to the correct answer
+         $correctAnswer = $this->questions[$this->currentQuestionIndex]->answer;
          if ($this->userAnswer === $correctAnswer) {
              $this->score += 10;
          }

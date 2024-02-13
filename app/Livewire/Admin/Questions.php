@@ -9,7 +9,7 @@ class Questions extends Component
 {
     use Actions;
     use  WithPagination;
-    public $answer1, $answer2, $answer3,$answer, $question,$search;
+    public $answer1, $answer2, $answer3,$answer, $question,$search, $hint;
     public $add_modal = false;
     public function render()
     {
@@ -40,9 +40,7 @@ class Questions extends Component
              'answer2' => 'required',
              'answer3' => 'required',
              'answer' => 'required',
-
-
-
+             'hint' => 'required',
 
          ]);
 
@@ -52,6 +50,7 @@ class Questions extends Component
             'answer2' => $this->answer2,
             'answer3' => $this->answer3,
             'answer' => $this->answer,
+            'hint' => $this->hint,
         ]);
         $this->notification()->success(
             $title = 'Question saved!',
@@ -60,7 +59,7 @@ class Questions extends Component
 
         $this->add_modal = false;
         $this->reset([
-            'question', 'answer1', 'answer2', 'answer3','answer'
+            'question', 'answer1', 'answer2', 'answer3','answer','hint'
         ]);
     }
 }

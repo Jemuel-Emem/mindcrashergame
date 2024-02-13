@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('answer2');
             $table->string('answer3');
             $table->string('answer');
+            $table->string('hint');
             $table->timestamps();
         });
     }

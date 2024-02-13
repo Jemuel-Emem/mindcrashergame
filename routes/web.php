@@ -41,6 +41,10 @@ Route::middleware([
         Route::get('/Easy', function(){
             return view('Admin.Easy');
         })->name('Easy');
+
+        Route::get('/Hard', function(){
+            return view('Admin.Hard');
+        })->name('Hard');
      });
 
      Route::prefix('user')->middleware('user')->group(function(){
@@ -55,6 +59,10 @@ Route::middleware([
         Route::get('/medium', function(){
             return view('User.medium');
         })->name('medium');
+
+        Route::get('/Hard', function(){
+            return view('User.Hard');
+        })->name('hard');
 
         // Route::get('/results', function(){
         //     return view('User.result');
