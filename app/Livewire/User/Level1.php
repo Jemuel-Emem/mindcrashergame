@@ -30,11 +30,14 @@ class Level1 extends Component
     public function render()
     {
         if ($this->currentQuestionIndex >= $this->maxQuestions || !isset($this->questions[$this->currentQuestionIndex])) {
-            $user = auth()->user();
-                user::updateOrCreate(
-                    ['id' => $user->id],
-                    ['coins1' => $this->score]
-                );
+                 $user = auth()->user();
+                 if ($this->score > $user->coins1){
+                    user::updateOrCreate(
+                        ['id' => $user->id],
+                        ['coins1' => $this->score]
+                    );
+                 }
+
 
             return view('livewire.User.easypoints', [
                 'score1' => $this->score,
