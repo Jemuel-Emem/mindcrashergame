@@ -23,9 +23,9 @@ class Level1 extends Component
     public $amount;
 
     public function mount()
-    {
-        $this->questions = Modelquestion::inRandomOrder()->limit($this->maxQuestions)->get();
-    }
+{
+    $this->questions = Modelquestion::orderByRaw('RAND()')->limit($this->maxQuestions)->get();
+}
 
     public function render()
     {

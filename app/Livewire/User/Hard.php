@@ -37,51 +37,47 @@ class Hard extends Component
     }
     public function render()
     {
-       
-        if ($this->currentQuestionIndex >= $this->maxQuestions) {
+
+        if ($this->currentQuestionIndex >= $this->maxQuestions || !isset($this->questions[$this->currentQuestionIndex])) {
             $user = auth()->user();
 
-            if ($this->score > $user->coins1) {
+            if ($this->score > $user->coins3) {
                 UserCoins::updateOrCreate(
                     ['id' => $user->id],
-                    ['coins1' => $this->score]
+                    ['coins3' => $this->score]
                 );
             }
 
-            return view('livewire.User.easypoints', [
-                'score' => $this->score,
-                'correctAnswer' => $this->correctAnswer,
+            return view('livewire.User.hardpoints', [
+                'score1' => $this->score,
+                'correctAnswer1' => $this->correctAnswer,
             ]);
         }
 
-        $this->questions = hards::inRandomOrder()->limit($this->maxQuestions)->get();
+       $this->questions = hards::inRandomOrder()->limit($this->maxQuestions)->get();
         $currentQuestion = $this->questions[$this->currentQuestionIndex];
-        $this->correctAnswer = $currentQuestion->answer;
+        $this->correctAnswer = $currentQuestion->correctcode;
 
         return view('livewire.user.hard', compact('currentQuestion'));
 
     }
 
-    public function checkCode(){
-        $correctAnswer = $this->questions[$this->currentQuestionIndex]->correctcode;
+    public function checkCode()
+{
+    $correctAnswer = $this->questions[$this->currentQuestionIndex]->correctcode;
 
-        if ($this->userAnswer === $correctAnswer) {
+    if ($this->userAnswer === $correctAnswer) {
 
-            $this->currentQuestionIndex++;
-            $this->score += 10;
+        $this->score += 10;
+        $this->currentQuestionIndex++;
+    } else {
 
-
-        }
-
-        else{
-            $this->dialog()->error(
-                $title = 'Error !!!',
-                $description = 'Please Check Your Code'
-            );
-
-        }
+        $this->isWrongAnswer = true;
+    }
+    $this->userAnswer = '';
+}
 
 
 
     }
-}
+

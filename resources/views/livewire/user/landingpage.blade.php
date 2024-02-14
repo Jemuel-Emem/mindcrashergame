@@ -2,7 +2,7 @@
     <div class="flex justify-between">
       <div>
         <i class="ri-copper-diamond-fill text-green-700 md:text-4xl text-xl"></i>
-        <label for="" class="font-black md:text-4xl text-xl text-green-500">{{ auth()->user()->coins1 + auth()->user()->coins2 }}</label>
+        <label for="" class="font-black md:text-4xl text-xl text-green-500">{{ auth()->user()->coins1 + auth()->user()->coins2  + auth()->user()->coins3}} </label>
       </div>
       @if (auth()->user()->totalcoins >=0 && auth()->user()->totalcoins < 50)
       <div>
@@ -29,7 +29,7 @@
         <span class="flex flex-col gap-4">
         <a href="{{ route('easy') }}"><button class="text-white p-2  rounded bg-green-400 hover:bg-green-500 w-72 h-16" >Easy</button></a>
        <a href="{{ route('medium') }}"> <button class="text-white p-2  rounded bg-blue-400 hover:bg-blue-500 w-72 h-16">Medium</button></a>
-        <button class="text-white p-2  rounded bg-yellow-500  hover:bg-yellow-600 w-72 h-16">Hard</button>
+       <a href="{{ route('hard') }}"> <button  class="text-white p-2  rounded bg-yellow-500  hover:bg-yellow-600 w-72 h-16">Hard</button></a>
         </span>
      </div>
    </div>

@@ -22,7 +22,7 @@ class Level2 extends Component
     public function mount()
     {
 
-        $this->questions = Modelquestion::inRandomOrder()->limit($this->maxQuestions)->get();
+        $this->questions = Modelquestion::orderByRaw('RAND()')->limit($this->maxQuestions)->get();
     }
     public function render()
     {
