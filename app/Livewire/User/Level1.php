@@ -17,7 +17,7 @@ class Level1 extends Component
     public $currentQuestionIndex = 0;
     public $userAnswer = '';
     public $score = 0;
-    public $maxQuestions = 5;
+    public $maxQuestions = 1;
     public $showContent = false;
     public $correctAnswer;
     public $amount;
@@ -31,13 +31,10 @@ class Level1 extends Component
     {
         if ($this->currentQuestionIndex >= $this->maxQuestions || !isset($this->questions[$this->currentQuestionIndex])) {
             $user = auth()->user();
-            if ($this->score > $user->coins2) {
-
                 user::updateOrCreate(
                     ['id' => $user->id],
                     ['coins1' => $this->score]
                 );
-            }
 
             return view('livewire.User.easypoints', [
                 'score1' => $this->score,

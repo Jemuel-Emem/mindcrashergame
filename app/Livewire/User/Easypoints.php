@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Livewire\User;
-
 use Livewire\Component;
 
 class Easypoints extends Component
@@ -24,7 +23,7 @@ class Easypoints extends Component
 
         return view('livewire.user.easypoints');
     }
-    public function save(){
+    public function hello(){
         dd("sasa");
        }
 }

@@ -52,6 +52,9 @@
               <li>
                 <a href="{{ route('user-dashboard') }}"  class="block py-2 px-3 text-white  rounded md:bg-transparent  md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
               </li>
+              <li>
+                <a href="{{ route('leaderboard') }}"  class="block py-2 px-3 text-white  rounded md:bg-transparent  md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">LeaderBoard</a>
+              </li>
 
               <li>
                 <a href="{{ route('logout') }}" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent  md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">

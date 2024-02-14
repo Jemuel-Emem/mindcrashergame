@@ -64,6 +64,11 @@ Route::middleware([
             return view('User.Hard');
         })->name('hard');
 
+        Route::get('/leaderboard', function(){
+            return view('User.leaderboard');
+        })->name('leaderboard');
+
+
         // Route::get('/results', function(){
         //     return view('User.result');
         // })->name('results');

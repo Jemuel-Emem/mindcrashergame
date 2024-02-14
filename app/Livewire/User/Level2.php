@@ -34,6 +34,13 @@ class Level2 extends Component
                     ['id' => $user->id],
                     ['coins2' => $this->score]
                 );
+
+                $currentMoney = Coins::where('id', $user->id)->value('money');
+                $newMoney = $currentMoney + $this->score;
+                Coins::updateOrCreate(
+                    ['id' => $user->id],
+                    ['money' => $newMoney]
+                );
             }
 
             return view('livewire.User.Mediumpoints', [
