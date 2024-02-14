@@ -1,28 +1,29 @@
 
-<div>
-
-
-<div class="relative overflow-x-auto">
+<div class="p-2">
+<div class="flex justify-center">
+    <h1 class="md:text-6xl text-2xl font-black text-green-600">LEADERBOARD</h1>
+</div>
+<div class="relative overflow-x-auto mt-2">
     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+        <thead class="text-xs text-white uppercase bg-yellow-400 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-                <th scope="col" class="px-6 py-3 rounded-s-lg">
+                <th scope="col" class="px-6 py-3 rounded-s-lg text-white">
                     Username
                 </th>
-                <th scope="col" class="px-6 py-3">
-                    Score
+                <th scope="col" class="px-6 py-3 text-center text-white">
+                   COINS
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="">
             @foreach ($result as $user)
                 @if ($user->name !== 'ADMINISTRATOR')
-                    <tr class="bg-white dark:bg-gray-800">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $user->name }}
+                    <tr class="bg-white ">
+                        <th scope="row" class="px-6 py-4 font-bold text-green-500 whitespace-nowrap dark:text-white ">
+                            <i class="ri-shield-user-fill"></i>  {{ $user->name }}
                         </th>
-                        <td class="px-6 py-4">
-                            {{ $user->total_score }}
+                        <td class="px-6 py-4 text-green-500 text-center text-xl">
+                            {{ $user->total_score }} <i class="ri-copper-diamond-line"></i></i>
                         </td>
                     </tr>
                 @endif

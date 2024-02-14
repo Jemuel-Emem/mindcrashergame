@@ -18,9 +18,20 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Graphik', 'sans-serif'],
+                serif: ['Merriweather', 'serif'],
+                body: ['"Open Sans"'],
+                display: ['Oswald'],
             },
+
+            colors: {
+
+                'bermuda': '#32915A',
+
+              },
         },
+
+
     },
 
     plugins: [forms],

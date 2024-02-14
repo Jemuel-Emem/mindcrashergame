@@ -29,10 +29,10 @@
 
 </head>
 
-<body class="font-sans antialiased md:h-screen h-cover bg-no-repeat bg-gradient-to-tr from-blue-700 via-white to-blue-100">
+<body class="font-sans antialiased  h-screen bg-no-repeat bg-gradient-to-tr from-bermuda via-white to-blue-100">
     @livewireScripts
     <x-dialog />
-    <nav class="bg-blue-700 border-gray-200 dark:bg-gray-900 ">
+    <nav class="bg-bermuda border-gray-200 dark:bg-gray-900 ">
         <audio id="song" class="block w-full max-w-md mx-auto" >
             <source src="{{ asset('music/m1.mp3') }}" type="audio/mpeg" loop>
         </audio>

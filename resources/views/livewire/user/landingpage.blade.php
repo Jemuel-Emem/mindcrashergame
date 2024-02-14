@@ -20,16 +20,18 @@
    <div class="p-20 relative">
     <div class="md:absolute none right-30 md:left-80 ">
         <div class="flex flex-col">
-            <label for="" class="text-blue-700 font-black md:text-4xl text-lg text-center">ARE YOU READY TO BREAK YOUR MIND?</label>
-            <img src="{{ asset('images/logo.png') }}" alt="Violation Photo" class="md:w-50 md:h-50 md:mt-2">
+            <label for="" class="text-bermuda font-black md:text-4xl text-lg text-center" >ARE YOU READY TO BREAK YOUR MIND?</label>
+           <div class="flex justify-center">
+            <img src="{{ asset('images/logonamon.gif') }}" alt="Violation Photo" class="md:w-80 md:h-80 md:mt-2">
         </div>
+           </div>
 
     </div>
      <div class="flex  md:justify-end justify-center md:mt-0 mt-10">
         <span class="flex flex-col gap-4">
         <a href="{{ route('easy') }}"><button class="text-white p-2  rounded bg-green-400 hover:bg-green-500 w-72 h-16" >Easy</button></a>
        <a href="{{ route('medium') }}"> <button class="text-white p-2  rounded bg-blue-400 hover:bg-blue-500 w-72 h-16">Medium</button></a>
-       <a href="{{ route('hard') }}"> <button  class="text-white p-2  rounded bg-yellow-500  hover:bg-yellow-600 w-72 h-16">Hard</button></a>
+       <a href="{{ route('hard') }}"> <button  class="text-white p-2  rounded bg-amber-400  hover:bg-amber-500 w-72 h-16">Hard</button></a>
         </span>
      </div>
    </div>
