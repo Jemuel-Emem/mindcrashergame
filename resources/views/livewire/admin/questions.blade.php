@@ -7,7 +7,7 @@
         <x-button  label="Search " wire:click.prevent="asss" class="bg-green-700 text-white hover:bg-green-900" />
     </div>
     </div>
-    <div class="relative overflow-x-auto ">
+    <div class="relative overflow-x-auto mt-4">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -26,6 +26,9 @@
                      <th scope="col" class="px-6 py-3">
                       Correct Answer
                      </th>
+                     <th scope="col" class="px-6 py-3">
+                       Hint
+                       </th>
 
                     <th scope="col" class="px-6 py-3 text-center">
                         Action
@@ -40,6 +43,7 @@
                     <td class="px-6 py-4">{{ $q->answer2 }}</td>
                     <td class="px-6 py-4">{{ $q->answer3 }}</td>
                     <td class="px-6 py-4">{{ $q->answer }}</td>
+                    <td class="px-6 py-4">{{ $q->hint }}</td>
 
 
 

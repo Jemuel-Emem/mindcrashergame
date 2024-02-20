@@ -29,7 +29,7 @@
 
 </head>
 
-<body class="font-sans antialiased  h-screen bg-no-repeat bg-gradient-to-tr from-bermuda via-white to-blue-100">
+<body class="font-sans antialiased  md:h-screen h-cover    bg-no-repeat bg-gradient-to-tr from-bermuda via-white to-blue-100">
     @livewireScripts
     <x-dialog />
     <nav class="bg-bermuda border-gray-200 dark:bg-gray-900 ">

@@ -17,10 +17,11 @@ class Level1 extends Component
     public $currentQuestionIndex = 0;
     public $userAnswer = '';
     public $score = 0;
-    public $maxQuestions = 1;
+    public $maxQuestions = 3;
     public $showContent = false;
     public $correctAnswer;
     public $amount;
+    public $clicked = false;
 
     public function mount()
 {
@@ -29,6 +30,7 @@ class Level1 extends Component
 
     public function render()
     {
+
         if ($this->currentQuestionIndex >= $this->maxQuestions || !isset($this->questions[$this->currentQuestionIndex])) {
                  $user = auth()->user();
                  if ($this->score > $user->coins1){
@@ -53,6 +55,7 @@ class Level1 extends Component
 
     public function nextQuestion()
     {
+        $this->clicked = false;
         $correctAnswer = $this->questions[$this->currentQuestionIndex]->answer;
         if ($this->userAnswer === $correctAnswer) {
             $this->score += 10;
@@ -91,6 +94,7 @@ class Level1 extends Component
     }
 
     public function deduct($id){
+        $this->clicked = true;
         $deductionAmount = 5;
 
         $userCoins = User::find($id);
@@ -107,6 +111,7 @@ class Level1 extends Component
                     $title = 'Success',
                     $description = "Your gems have been deducted. Here's a hint: $randomHint"
                 );
+
             }
 
             else if ($userCoins->coins2 >= $deductionAmount) {
@@ -121,6 +126,20 @@ class Level1 extends Component
                     $description = "Your gems have been deducted. Here's a hint: $randomHint"
                 );
             }
+
+            else if ($userCoins->coins3 >= $deductionAmount) {
+                $userCoins->coins3 -= $deductionAmount;
+                $userCoins->save();
+
+                $currentQuestion = $this->questions[$this->currentQuestionIndex];
+                $randomHint = $currentQuestion->hint;
+
+                $this->dialog()->success(
+                    $title = 'Success',
+                    $description = "Your gems have been deducted. Here's a hint: $randomHint"
+                );
+            }
+
 
 
             else {
@@ -138,5 +157,9 @@ class Level1 extends Component
 
         return redirect()->back();
     }
+
+
+
+
     }
 

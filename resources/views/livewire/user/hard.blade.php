@@ -18,6 +18,16 @@
     </div>
 
     @else
+    <div class="flex justify-center mb-4">
+        <div  x-data="{ title: 'are you sure?, it will deduct 5 coins' }">
+         <i class="ri-lightbulb-fill text-8xl text-yellow-500 hover:text-yellow-400"  x-on:confirm="{
+             title,
+             icon: 'warning',
+             method: 'deduct',
+             params: {{ auth()->user()->id }}
+         }"></i>
+         </div>
+     </div>
     <div>
            <div class="flex justify-center mb-8 text-red-500 text-4xl font-black">
             <div id="countdown"></div>
@@ -34,7 +44,7 @@
 
             <div class="mt-4 flex md:justify-center justify-center gap-2">
                 <button wire:click="checkCode" class="bg-yellow-500 hover:bg-yellow-600 md:w-40 w-80 h-12 rounded md:mr-0 ">RUN</button>
-                <button wire:click="nextQuestion" class="bg-yellow-500 hover:bg-yellow-600 md:w-40 w-80 h-12 rounded md:mr-0 ">Next</button>
+                {{-- <button wire:click="nextQuestion" class="bg-yellow-500 hover:bg-yellow-600 md:w-40 w-80 h-12 rounded md:mr-0 ">Next</button> --}}
             </div>
         </div>
     @endif
@@ -52,7 +62,7 @@
         }
 
         // Set the duration of the countdown in seconds
-        const countdownDuration = 22;
+        const countdownDuration = 102;
 
         // Calculate the end time
         const countDownDate = new Date().getTime() + countdownDuration * 1000;

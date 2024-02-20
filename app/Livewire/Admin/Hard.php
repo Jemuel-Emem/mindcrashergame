@@ -10,7 +10,7 @@ class Hard extends Component
 {
     use Actions;
     use  WithPagination;
-    public $givencode, $correctcode,$question,$search;
+    public $givencode, $correctcode,$question,$search, $hint;
     public $add_modal = false;
     public function render()
 
@@ -33,12 +33,14 @@ class Hard extends Component
              'question' => 'required',
              'givencode' => 'required',
              'correctcode' => 'required',
+             'hint' => 'required',
          ]);
 
       q::create([
             'question' => $this->question,
             'givencode' => $this->givencode,
             'correctcode' => $this->correctcode,
+            'hint' => $this->hint,
         ]);
         $this->notification()->success(
             $title = 'Question saved!',
@@ -47,7 +49,7 @@ class Hard extends Component
 
         $this->add_modal = false;
         $this->reset([
-            'question', 'givencode', 'correctcode',
+            'question', 'givencode', 'correctcode', 'hint',
         ]);
     }
 

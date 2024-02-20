@@ -45,6 +45,14 @@ Route::middleware([
         Route::get('/Hard', function(){
             return view('Admin.Hard');
         })->name('Hard');
+
+        Route::get('/Mechanics-Tutorial', function(){
+            return view('Admin.mechanics-tutorial');
+        })->name('mechanics-tutorial');
+
+        Route::get('/Users', function(){
+            return view('Admin.users');
+        })->name('users');
      });
 
      Route::prefix('user')->middleware('user')->group(function(){
@@ -67,6 +75,8 @@ Route::middleware([
         Route::get('/leaderboard', function(){
             return view('User.leaderboard');
         })->name('leaderboard');
+
+
 
 
         // Route::get('/results', function(){

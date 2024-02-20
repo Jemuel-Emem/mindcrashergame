@@ -1,7 +1,7 @@
 <x-user-layout>
     <div>
 
-        <div class=" p-2">
+        <div class="  h-cover">
             <livewire:user.landingpage />
         </div>
 

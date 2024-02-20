@@ -7,7 +7,7 @@
         <x-button  label="Search " wire:click.prevent="asss" class="bg-green-700 text-white hover:bg-green-900" />
     </div>
     </div>
-    <div class="relative overflow-x-auto ">
+    <div class="relative overflow-x-auto mt-4">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -21,6 +21,10 @@
                       Correct Code
                     </th>
 
+                    <th scope="col" class="px-6 py-3">
+                        Hint
+                      </th>
+
                     <th scope="col" class="px-6 py-3 text-center">
                         Action
                     </th>
@@ -32,7 +36,7 @@
                     <td class="px-6 py-4">{{ $q->question }}</td>
                     <td class="px-6 py-4">{{ $q->givencode }}</td>
                     <td class="px-6 py-4">{{ $q->correctcode }}</td>
-
+                    <td class="px-6 py-4">{{ $q->hint }}</td>
                    <td class="px-6 py-4 flex gap-2 mt-4 justify-center">
                         <x-button class="w-16 h-6" label="edit" icon="pencil-alt" wire:click="edit({{ $q->id }})" positive />
                         <x-button class="w-16 h-6" label="delete" icon="pencil-alt" wire:click="delete({{ $q->id }})" negative />
@@ -59,7 +63,8 @@
                 <x-textarea wire:model="question" label="Question" placeholder="Write question here" />
                 <x-textarea wire:model="givencode" label="Given code" placeholder="Write given code here" />
                 <x-textarea wire:model="correctcode" label="Correct Code" placeholder="Write the correct code here" />
-
+                <p class="text-blue-700">Write  hint for question</p>
+                <x-input label="Hint" placeholder="write hint here" wire:model="hint" />
             </div>
 
             <x-slot name="footer">

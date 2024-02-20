@@ -18,7 +18,18 @@
         </x-card>
     </div>
     @else
-
+    @if (!$clicked)
+    <div class="flex justify-center mb-4">
+        <div  x-data="{ title: 'are you sure?, it will deduct 5 coins' }">
+         <i class="ri-lightbulb-fill text-8xl text-yellow-500 hover:text-yellow-400"  x-on:confirm="{
+             title,
+             icon: 'warning',
+             method: 'deduct',
+             params: {{ auth()->user()->id }}
+         }"></i>
+         </div>
+     </div>
+     @endif
     <div>
            <div class="flex justify-center mb-8 text-red-500 text-4xl font-black">
             <div id="countdown"></div>

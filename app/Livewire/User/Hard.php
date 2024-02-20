@@ -13,7 +13,7 @@ class Hard extends Component
     public $currentQuestionIndex = 0;
     public $userAnswer = '';
     public $score = 0;
-    public $maxQuestions = 3;
+    public $maxQuestions = 2;
     public $showContent = false;
     public $isWrongAnswer = false;
     public $timer;
@@ -24,7 +24,7 @@ class Hard extends Component
     public function mount()
     {
 
-        $this->questions = hards::inRandomOrder()->limit($this->maxQuestions)->get();
+        $this->questions = hards::orderByRaw('RAND()')->limit($this->maxQuestions)->get();
 
     }
 
@@ -49,12 +49,12 @@ class Hard extends Component
             }
 
             return view('livewire.User.hardpoints', [
-                'score1' => $this->score,
-                'correctAnswer1' => $this->correctAnswer,
+                'score3' => $this->score,
+                'correctAnswer' => $this->correctAnswer,
             ]);
         }
 
-       $this->questions = hards::inRandomOrder()->limit($this->maxQuestions)->get();
+
         $currentQuestion = $this->questions[$this->currentQuestionIndex];
         $this->correctAnswer = $currentQuestion->correctcode;
 
@@ -72,12 +72,76 @@ class Hard extends Component
         $this->currentQuestionIndex++;
     } else {
 
-        $this->isWrongAnswer = true;
+        $this->dialog()->error(
+            $title = 'Error !!!',
+            $description = 'Please check you syntax and try again'
+        );
     }
     $this->userAnswer = '';
 }
 
+public function deduct($id){
+    $deductionAmount = 5;
 
+    $userCoins = UserCoins::find($id);
+
+    if ($userCoins) {
+        if ($userCoins->coins1 >= $deductionAmount) {
+            $userCoins->coins1 -= $deductionAmount;
+            $userCoins->save();
+
+            $currentQuestion = $this->questions[$this->currentQuestionIndex];
+            $randomHint = $currentQuestion->hint;
+
+            $this->dialog()->success(
+                $title = 'Success',
+                $description = "Your gems have been deducted. Here's a hint: $randomHint"
+            );
+        }
+
+        else if ($userCoins->coins2 >= $deductionAmount) {
+            $userCoins->coins2 -= $deductionAmount;
+            $userCoins->save();
+
+            $currentQuestion = $this->questions[$this->currentQuestionIndex];
+            $randomHint = $currentQuestion->hint;
+
+            $this->dialog()->success(
+                $title = 'Success',
+                $description = "Your gems have been deducted. Here's a hint: $randomHint"
+            );
+        }
+
+        else if ($userCoins->coins3 >= $deductionAmount) {
+            $userCoins->coins3 -= $deductionAmount;
+            $userCoins->save();
+
+            $currentQuestion = $this->questions[$this->currentQuestionIndex];
+            $randomHint = $currentQuestion->hint;
+
+            $this->dialog()->success(
+                $title = 'Success',
+                $description = "Your gems have been deducted. Here's a hint: $randomHint"
+            );
+        }
+
+
+
+        else {
+            $this->dialog()->error(
+                $title = 'Insufficient Gems',
+                $description = 'You do not have enough gems to perform this action.'
+            );
+        }
+    } else {
+        $this->dialog()->error(
+            $title = 'Error',
+            $description = 'User not found.'
+        );
+    }
+
+    return redirect()->back();
+}
 
     }
 

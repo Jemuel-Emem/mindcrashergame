@@ -1,9 +1,9 @@
 <x-admin-layout>
 
     <div>
-        <h1 class="text-blue-700">Hard</h1>
+        <h1 class="text-blue-700">Users</h1>
         <div class=" p-10">
-            <livewire:admin.Hard />
+            <livewire:admin.users />
         </div>
     </div>
 </x-admin-layout>

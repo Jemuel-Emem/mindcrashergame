@@ -28,8 +28,9 @@
     @livewireStyles
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans antialiased bg-green-100">
     <x-notifications position="top-right" />
+
     <button data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar"
         aria-controls="sidebar-multi-level-sidebar" type="button"
         class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -45,66 +46,68 @@
     <aside id="sidebar-multi-level-sidebar"
         class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar">
-        <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-            <ul class="space-y-2 font-medium">
+        <div class="h-full px-3 py-4 overflow-y-auto bg-bermuda ">
+            <ul class="space-y-2 font-medium ">
                 <a href="ds">
-                    <div class="flex  flex-col items-center h-full px-3  overflow-y-auto bg-gray-50 dark:bg-gray-800">
+                    <div class="flex  flex-col items-center h-full px-3  overflow-y-auto  ">
                         <div class="">
                          <img src="{{ asset('images/sksu.png') }}" alt="Violation Photo" class="w-16 h-16">
                         </div>
-                          <div class="text-center">
+                          <div class="text-center mt-2">
                              <label for="" class="font-black text-blue-700 text-xl">MINDCRASHER</label>
                           </div>
                      </div>
                 </a>
                 <li>
                     <a href="Admindashboard"
-                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <i class="ri-dashboard-fill"></i>
                         <span class="ms-3">Dashboard</span>
                     </a>
                 </li>
 
                  <li>
-                    <a href="{{ route('Easy') }}"   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <i class="ri-account-pin-circle-fill"></i>
+                    <a href="{{ route('Easy') }}"   class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i class="ri-question-fill"></i>
                        <span class="flex-1 ms-3 whitespace-nowrap">Add Easy Questions</span>
 
                     </a>
                  </li>
 
                  <li>
-                    <a href="{{ route('Medium') }}"   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <i class="ri-account-pin-circle-fill"></i>
+                    <a href="{{ route('Medium') }}"   class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i class="ri-question-fill"></i>
                        <span class="flex-1 ms-3 whitespace-nowrap">Add Medium Questions</span>
 
                     </a>
                  </li>
 
                  <li>
-                    <a href="{{ route('Hard') }}"   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <i class="ri-account-pin-circle-fill"></i>
+                    <a href="{{ route('Hard') }}"   class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i class="ri-question-fill"></i>
                        <span class="flex-1 ms-3 whitespace-nowrap">Add Hard Questions</span>
+
+                    </a>
+                 </li>
+
+                 <li>
+                    <a href="{{ route('mechanics-tutorial') }}"   class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <i class="ri-information-fill"></i>
+                       <span class="flex-1 ms-3 whitespace-nowrap">Add Instructions  </span>
 
                     </a>
                  </li>
 
 
                  <li>
-                    <a href=""   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                    <a href="{{ route('users') }}"   class="flex items-center p-2 text-white hover:text-black rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <i class="ri-account-pin-circle-fill"></i>
                        <span class="flex-1 ms-3 whitespace-nowrap">Users</span>
 
                     </a>
                  </li>
 
-                 <li>
-                    <a href="{{ route('logout') }}"   class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <i class="ri-account-pin-circle-fill"></i>
-                       <span class="flex-1 ms-3 whitespace-nowrap">Logout</span>
 
-                    </a>
-                 </li>
 
 
 
@@ -115,13 +118,23 @@
         </div>
     </aside>
 
+    <div class="flex justify-end text-black p-10">
+        <div>
+           <span class="text-green-600 font-bold"> {{ Auth::user()->name }}</span>
+          <x-dropdown>
+              <x-dropdown.item label="Logout" class=""  href="{{  route('logout') }}"/>
+          </x-dropdown>
+        </div>
+      </div>
     <div class="p-4 sm:ml-64">
-        <div class="p-4  border-gray-200  rounded-lg dark:border-gray-700">
+        <div class="p-4  border-gray-200  rounded-lg dark:border-gray-700 ">
             <main>
                 {{ $slot }}
             </main>
         </div>
     </div>
+
+
 
 </body>
 

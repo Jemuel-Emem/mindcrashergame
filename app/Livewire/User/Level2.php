@@ -5,9 +5,10 @@ use App\Models\Questions2 as Modelquestion;
 use App\Models\Coins as coins;
 use App\Models\User as UserCoins;
 use Livewire\Component;
-
+use WireUi\Traits\Actions;
 class Level2 extends Component
 {
+    use Actions;
     public $questions;
     public $currentQuestionIndex = 0;
     public $userAnswer = '';
@@ -15,7 +16,7 @@ class Level2 extends Component
     public $maxQuestions = 1;
     public $timer;
     public $seconds = 30;
-
+    public $clicked = false;
     public $coinss;
     public $correctAnswer;
     public $showContent = false;
@@ -52,7 +53,7 @@ class Level2 extends Component
     public function nextQuestion()
     {
 
-
+        $this->clicked = false;
          $correctAnswer = $this->questions[$this->currentQuestionIndex]->answer;
          if ($this->userAnswer === $correctAnswer) {
              $this->score += 10;
@@ -91,5 +92,66 @@ class Level2 extends Component
 
        $this->showContent = !$this->showContent;
 
+    }
+
+    public function deduct($id){
+        $this->clicked = true;
+        $deductionAmount = 5;
+
+        $userCoins = UserCoins::find($id);
+
+        if ($userCoins) {
+            if ($userCoins->coins1 >= $deductionAmount) {
+                $userCoins->coins1 -= $deductionAmount;
+                $userCoins->save();
+
+                $currentQuestion = $this->questions[$this->currentQuestionIndex];
+                $randomHint = $currentQuestion->hint;
+
+                $this->dialog()->success(
+                    $title = 'Success',
+                    $description = "Your gems have been deducted. Here's a hint: $randomHint"
+                );
+            }
+
+            else if ($userCoins->coins2 >= $deductionAmount) {
+                $userCoins->coins2 -= $deductionAmount;
+                $userCoins->save();
+
+                $currentQuestion = $this->questions[$this->currentQuestionIndex];
+                $randomHint = $currentQuestion->hint;
+
+                $this->dialog()->success(
+                    $title = 'Success',
+                    $description = "Your gems have been deducted. Here's a hint: $randomHint"
+                );
+            }
+            else if ($userCoins->coins3 >= $deductionAmount) {
+                $userCoins->coins3 -= $deductionAmount;
+                $userCoins->save();
+
+                $currentQuestion = $this->questions[$this->currentQuestionIndex];
+                $randomHint = $currentQuestion->hint;
+
+                $this->dialog()->success(
+                    $title = 'Success',
+                    $description = "Your gems have been deducted. Here's a hint: $randomHint"
+                );
+            }
+
+            else {
+                $this->dialog()->error(
+                    $title = 'Insufficient Gems',
+                    $description = 'You do not have enough gems to perform this action.'
+                );
+            }
+        } else {
+            $this->dialog()->error(
+                $title = 'Error',
+                $description = 'User not found.'
+            );
+        }
+
+        return redirect()->back();
     }
 }
