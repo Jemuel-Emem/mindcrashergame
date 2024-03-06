@@ -2,7 +2,7 @@
     <div>
 
         <div class=" p-2 h-screen">
-            <livewire:user.level1 />
+            <livewire:user.certificate />
         </div>
 
     </div>

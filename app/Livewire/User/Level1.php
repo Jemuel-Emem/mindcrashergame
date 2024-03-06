@@ -3,6 +3,7 @@
 namespace App\Livewire\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User as user;
+use App\Models\Mechanics;
 use App\Models\Questions as Modelquestion;
 use App\Models\Coins as UserCoins;
 
@@ -23,8 +24,16 @@ class Level1 extends Component
     public $amount;
     public $clicked = false;
 
+    public $mechanics;
+    public $showFullMechanics = false;
+    public $position = 0;
+    public function toggle()
+    {
+        $this->position += 100;
+    }
     public function mount()
 {
+    $this->mechanics = Mechanics::find(1)->tutorial;
     $this->questions = Modelquestion::orderByRaw('RAND()')->limit($this->maxQuestions)->get();
 }
 

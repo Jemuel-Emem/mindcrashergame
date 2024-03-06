@@ -3,6 +3,7 @@
 namespace App\Livewire\User;
 use App\Models\Questions2 as Modelquestion;
 use App\Models\Coins as coins;
+use App\Models\Mechanics;
 use App\Models\User as UserCoins;
 use Livewire\Component;
 use WireUi\Traits\Actions;
@@ -20,8 +21,17 @@ class Level2 extends Component
     public $coinss;
     public $correctAnswer;
     public $showContent = false;
+
+    public $mechanics;
+    public $showFullMechanics = false;
+    public $position = 0;
+    public function toggle()
+    {
+        $this->position += 100;
+    }
     public function mount()
     {
+        $this->mechanics = Mechanics::find(2)->tutorial;
 
         $this->questions = Modelquestion::orderByRaw('RAND()')->limit($this->maxQuestions)->get();
     }

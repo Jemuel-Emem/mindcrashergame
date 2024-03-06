@@ -4,6 +4,7 @@
     <div class="flex gap-2 mt-2">
         <x-input label="" placeholder="Search..." wire:model="search" />
     <div>
+
         <x-button  label="Search " wire:click.prevent="asss" class="bg-green-700 text-white hover:bg-green-900" />
     </div>
     </div>
@@ -49,8 +50,17 @@
 
                    <td class="px-6 py-4 flex gap-2 mt-4 justify-center">
                         <x-button class="w-16 h-6" label="edit" icon="pencil-alt" wire:click="edit({{ $q->id }})" positive />
-                        <x-button class="w-16 h-6" label="delete" icon="pencil-alt" wire:click="delete({{ $q->id }})" negative />
+                        <x-button class="w-16 h-6" label="delete" icon="pencil-alt"
+                            x-on:confirm="{
+                                title: 'Sure Delete?',
+                                icon: 'warning',
+                                method: 'delete',
+                                params: {{ $q->id }}
+                            }" negative />
+
                     </td>
+
+
 
                 </tr>
                 @empty
@@ -91,20 +101,17 @@
     </x-modal>
 
 
-    {{-- <x-modal wire:model.defer="edit_modal">
+     <x-modal wire:model.defer="edit_modal">
         <x-card title="Edit Model">
             <div class="space-y-3">
-              <div class="flex gap-2">
-                <x-input label="Name" wire:model="name" placeholder="" />
-                <x-input label="Age" placeholder="" wire:model="age" />
-              </div>
-                <x-input label="Address" placeholder="" wire:model="address" />
-                <x-input label="Contact" placeholder="" wire:model="contact" />
-                <x-input label="Number" placeholder="" wire:model="number" />
-                <x-input label="Grade" wire:model="grade" placeholder="" />
-                <x-input label="Strand and Course" wire:model="strand_course" placeholder="" />
-                <x-input label="Section" placeholder="" wire:model="section" />
-
+                <x-input label="Question " placeholder="" wire:model="question" />
+                <x-input label="Choice # 1" placeholder="" wire:model="answer1" />
+                <x-input label="Choice # 2" wire:model="answer2" placeholder="" />
+                <x-input label="Choice # 3" placeholder="" wire:model="answer3" />
+                <p class="text-blue-700">Write  the correct answer</p>
+                <x-input label="Answer" placeholder="" wire:model="answer" />
+                <p class="text-blue-700">Write  hint for question</p>
+                <x-input label="Hint" placeholder="" wire:model="hint" />
 
             </div>
 
@@ -115,6 +122,6 @@
                 </div>
             </x-slot>
         </x-card>
-    </x-modal> --}}
+    </x-modal>
 </div>
 

@@ -24,12 +24,25 @@
                 <i class="ri-coins-line text-8xl text-yellow-500"></i>
             </div>
 
-            <div class="mt-4">
+            {{-- <div class="mt-4">
                 @if($score > auth()->user()->coins3 )
                 <p class="text-xl">YOU GET {{ $score }} POINTS</p>
             @else
                 <p class="text-xl text-red-500">Sorry, your score is lower than your current score.</p>
             @endif
+
+            </div> --}}
+
+            <div class="mt-4">
+                @if($score > auth()->user()->coins3 )
+                    <p class="text-xl">YOU GET {{ $score }} POINTS</p>
+                    @if($score == 200)
+                        <p class="text-lg text-green-700">Congratulations! You've earned enough points to receive a certificate.</p>
+                       <a href="{{ route('certificate') }}"> <button class="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4">Download Certificate</button></a>
+                    @endif
+                    @else
+                    <p class="text-xl text-red-500">Sorry, your score is lower than your current score.</p>
+                @endif
 
             </div>
 

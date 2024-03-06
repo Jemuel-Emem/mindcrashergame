@@ -7,27 +7,45 @@
     @if (!$showContent)
     <div class="">
         <x-card title="Read the mechanics">
-            <div class="text-start">
-                <p>This the game gbashashaisiah</p>
-            </div>
-            <div class="flex justify-center md:py-0 ">
-                <button onclick="startCountdown()" wire:click="toggleContent"  class="bg-green-500 hover:bg-green-600 text-white p-2 rounded md:h-16 h-16 md:w-2/12 w-11/12">Start</button>
+            <div class="text-start flex flex-col">
+                @php
+                $mechanicsSubstring = substr($mechanics, $position, 500);
+                $mechanicsLines = str_split($mechanicsSubstring, 200); // Split into lines of 100 characters
+                echo implode("<br>", $mechanicsLines); // Concatenate lines with <br> tags
+            @endphp
+
+            @if (strlen($mechanics) > ($position + 500))
+                <button wire:click="toggle" class="text-blue-500">
+                    Read More
+                </button>
+            @endif
             </div>
 
+           @if (strlen($mechanics) < ($position + 500))
+           <div class="flex justify-center md:mt-40 mt-40">
+            <button onclick="startCountdown()" wire:click="toggleContent"  class="bg-green-500 hover:bg-green-600 text-white p-2 rounded md:h-16 h-16 md:w-2/12 w-11/12">Start</button>
+        </div>
+           @endif
         </x-card>
     </div>
 
     @else
-    <div class="flex justify-center mb-4">
-        <div  x-data="{ title: 'are you sure?, it will deduct 5 coins' }">
-         <i class="ri-lightbulb-fill text-8xl text-yellow-500 hover:text-yellow-400"  x-on:confirm="{
-             title,
-             icon: 'warning',
-             method: 'deduct',
-             params: {{ auth()->user()->id }}
-         }"></i>
-         </div>
-     </div>
+    <div class="flex md:flex-row flex-col justify-around mb-4 text-center">
+        <div class="mt-8">
+            <button class="bg-yellow-500 hover:bg-yellow-400 text-white p-2 rounded-lg w-32" onclick="toggleMusic()">ON/OFF</button>
+        </div>
+        @if (!$clicked)
+        <div x-data="{ title: 'Are you sure? It will deduct 5 coins' }">
+            <i class="ri-lightbulb-fill text-8xl text-yellow-500 hover:text-yellow-400"
+                x-on:confirm="{
+                    title,
+                    icon: 'warning',
+                    method: 'deduct',
+                    params: {{ auth()->user()->id }}
+                }"></i>
+        </div>
+        @endif
+    </div>
     <div>
            <div class="flex justify-center mb-8 text-red-500 text-4xl font-black">
             <div id="countdown"></div>
@@ -44,7 +62,7 @@
 
             <div class="mt-4 flex md:justify-center justify-center gap-2">
                 <button wire:click="checkCode" class="bg-yellow-500 hover:bg-yellow-600 md:w-40 w-80 h-12 rounded md:mr-0 ">RUN</button>
-                {{-- <button wire:click="nextQuestion" class="bg-yellow-500 hover:bg-yellow-600 md:w-40 w-80 h-12 rounded md:mr-0 ">Next</button> --}}
+                <button wire:click="nextQuestion" class="bg-yellow-500 hover:bg-yellow-600 md:w-40 w-80 h-12 rounded md:mr-0 ">Next</button>
             </div>
         </div>
     @endif
@@ -98,5 +116,13 @@
         updateCountdown();
     }
 
-
+    function toggleMusic() {
+    if (isMusicPlaying) {
+        backgroundMusic.pause();
+        isMusicPlaying = false;
+    } else {
+        backgroundMusic.play();
+        isMusicPlaying = true;
+    }
+}
     </script>

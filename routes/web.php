@@ -76,6 +76,11 @@ Route::middleware([
             return view('User.leaderboard');
         })->name('leaderboard');
 
+        Route::get('/certificate', function(){
+            return view('User.certificate');
+        })->name('certificate');
+
+
 
 
 

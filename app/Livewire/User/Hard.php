@@ -2,6 +2,7 @@
 
 namespace App\Livewire\User;
 use App\Models\Hard as hards;
+use App\Models\Mechanics;
 use App\Models\User as UserCoins;
 use WireUi\Traits\Actions;
 use Livewire\Component;
@@ -20,10 +21,17 @@ class Hard extends Component
     public $seconds = 30;
 
     public $correctAnswer;
-
+    public $mechanics;
+    public $showFullMechanics = false;
+    public $position = 0;
+    public $clicked = false;
+    public function toggle()
+    {
+        $this->position += 100;
+    }
     public function mount()
     {
-
+        $this->mechanics = Mechanics::find(3)->tutorial;
         $this->questions = hards::orderByRaw('RAND()')->limit($this->maxQuestions)->get();
 
     }
@@ -142,6 +150,40 @@ public function deduct($id){
 
     return redirect()->back();
 }
+
+// public function nextQuestion()
+//     {
+
+
+//         $correctAnswer = $this->questions[$this->currentQuestionIndex]->correctcode;
+
+//     if ($this->userAnswer === $correctAnswer) {
+
+//         $this->score += 10;
+//         $this->currentQuestionIndex++;
+//     }
+
+//     if ($this->currentQuestionIndex >= $this->maxQuestions) {
+//         $this->render();
+//     }
+//     $this->userAnswer = '';
+//     }
+
+public function nextQuestion()
+{
+    // Increment the current question index
+    $this->currentQuestionIndex++;
+
+    // Check if the current question index exceeds the maximum questions
+    if ($this->currentQuestionIndex >= $this->maxQuestions) {
+        // If there are no more questions, render the score page
+        return $this->render();
+    }
+
+    // Reset the user's answer for the next question
+    $this->userAnswer = '';
+}
+
 
     }
 
